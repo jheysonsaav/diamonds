@@ -1,6 +1,8 @@
 use clap::{App, ArgMatches, Shell};
 use std::io;
 
+use crate::utils::logs::Log;
+
 pub fn completions_command(app: App, args: &ArgMatches) {
     let shell: Shell;
 
@@ -13,6 +15,7 @@ pub fn completions_command(app: App, args: &ArgMatches) {
         _ => panic!(),
     }
 
+    Log::debug(format!("The shell is {}", shell).as_str());
     app.clone()
         .gen_completions_to("diamonds", shell, &mut io::stdout());
     println!();
